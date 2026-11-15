@@ -199,6 +199,8 @@ export class Zeichnung {
     this.pruefungen = []; // {bez, ist, soll, ok, grundlage} in mm
     this.widerstaende = []; // {gruppe, bez, wert, einheit, grundlage} überschlägige Bemessungswerte
     this.tragHinweise = []; // Annahmen zur Tragfähigkeit (Texte)
+    this.auto = {}; // key -> Wert: automatisch ermittelte Eingaben (Parameter mit auto: true und Wert 0)
+    this.anpassungen = []; // Texte: was die Automatik an die Profile angepasst hat bzw. was nicht lösbar ist
     this.warnungen = []; // Layout-Hinweise der Bausteine selbst (z. B. Symbol entfällt)
     this.clipNr = 0; // fortlaufende Nummer für clipPath-IDs
   }
@@ -319,14 +321,23 @@ export class Zeichnung {
   }
 
   // Horizontale Maßkette. punkte: x-Werte; hilfslinien: Map/Objekt x -> y_start der Hilfslinie
-  massH(punkte, y, labels, hilfslinien = null) {
+  // opt.aussen ("rechts" | "links"): passt eine Beschriftung nicht zwischen ihre Hilfslinien, stehen
+  // alle Beschriftungen der Kette in ihrer Reihenfolge neben dem Kettenende (z. B. „e_{2,T} | e_{2}“);
+  // opt.immer: immer dort (wenn z. B. eine Hinweislinie durch die Kette läuft).
+  // Rückgabe: Umrandung dieses Textes oder null.
+  massH(punkte, y, labels, hilfslinien = null, opt = {}) {
     for (const [x, ys] of eintraege(hilfslinien)) this.linie(x, ys, x, y + 5, "mass", 0.7);
+    const eng = opt.aussen && (opt.immer || labels.some((l, i) => typeof l === "string" && l && this.messe(l, 14) > Math.abs(punkte[i + 1] - punkte[i]) - 4));
     for (let i = 0; i + 1 < punkte.length; i++) {
       const a = punkte[i], b = punkte[i + 1];
       this.linie(a, y, b, y, "mass", 0.8, null, ' marker-start="url(#pf-mass)" marker-end="url(#pf-mass)"');
+      if (eng) continue;
       const lab = this.passend(labels[i], Math.abs(b - a) - 4); // Text zwischen den Hilfslinien
       if (lab) this.text((a + b) / 2, y - (/_\{/.test(lab) ? 8 : 5), lab, 14, "middle"); // Index hält Abstand zur Maßlinie
     }
+    if (!eng) return null;
+    const s = labels.map((l) => (Array.isArray(l) ? l[0] : l)).filter(Boolean).join(" | ");
+    return opt.aussen === "links" ? this.text(Math.min(...punkte) - 8, y + 5, s, 14, "end") : this.text(Math.max(...punkte) + 8, y + 5, s, 14, "start");
   }
 
   // Aus Alternativen [lang, kurz, …] die erste wählen, die in breite px passt (sonst die letzte)
@@ -451,10 +462,32 @@ export class Zeichnung {
     this.poly(pts.map(([x, y]) => (liegend ? [cx + P(y), cy + P(x)] : [cx + P(x), cy + P(y)])), art, 1.0);
   }
 
+  // Ende eines liegenden I-Profils im Querschnitt (Steg waagerecht): Flansch rechts mit Außenfläche
+  // bei xAussen (px), Achse cy (px), sichtbar sind laengeMm ab der Außenfläche; links abgeschnitten.
+  // Für tiefe Stützen, von denen nur der Anschlussbereich gezeigt wird.
+  iProfilEnde(xAussen, cy, pr, P, laengeMm, art = "schnitt") {
+    const { b, tw, tf } = pr, r = pr.r || 0, L = laengeMm;
+    const pts = [[0, -b / 2], [0, b / 2], [-tf, b / 2]];
+    const bogen = (mx, my, a0, a1) => { for (let i = 0; i <= 6; i++) { const a = a0 + ((a1 - a0) * i) / 6; pts.push([mx + r * Math.cos(a), my + r * Math.sin(a)]); } };
+    if (r > 0) bogen(-tf - r, tw / 2 + r, 0, -Math.PI / 2); else pts.push([-tf, tw / 2]);
+    pts.push([-L, tw / 2], [-L, -tw / 2]);
+    if (r > 0) bogen(-tf - r, -tw / 2 - r, Math.PI / 2, 0); else pts.push([-tf, -tw / 2]);
+    pts.push([-tf, -b / 2]);
+    this.poly(pts.map(([x, y]) => [xAussen + P(x), cy + P(y)]), art, 1.0);
+  }
+
   // I-Profil in Ansicht auf den Steg: Rechteck mit Flansch- und Ausrundungslinien.
   // waagerecht (Träger): x, y = linke obere Ecke, laenge in px; senkrecht (Stütze): Profilhöhe waagerecht.
-  iAnsicht(x, y, laengePx, pr, P, { senkrecht = false, art = "ansicht_hinten" } = {}) {
+  // teil (mm, nur senkrecht): nur der rechte Teil dieser Breite mit dem rechten Flansch (x = linker Rand des Teils).
+  iAnsicht(x, y, laengePx, pr, P, { senkrecht = false, art = "ansicht_hinten", teil = null } = {}) {
     const H = P(pr.h), tf = P(pr.tf), tr = P(pr.tf + (pr.r || 0));
+    if (senkrecht && teil !== null && teil < pr.h - 1e-9) {
+      const B = P(teil);
+      this.rect(x, y, B, laengePx, art, 1.2);
+      this.linie(x + B - tf, y, x + B - tf, y + laengePx, "text", 0.9);
+      if (tr - tf > 1.5) this.linie(x + B - tr, y, x + B - tr, y + laengePx, "text", 0.4);
+      return;
+    }
     if (!senkrecht) {
       this.rect(x, y, laengePx, H, art, 1.2);
       for (const yy of [tf, H - tf]) this.linie(x, y + yy, x + laengePx, y + yy, "text", 0.9);

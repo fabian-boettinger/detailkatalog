@@ -147,6 +147,8 @@ td { padding: 3px 6px 3px 0; border-bottom: 1px solid var(--linie); vertical-ali
 .z { text-align: right; font-family: var(--font-mono); font-size: 13px; white-space: nowrap; }
 tr.ok td:last-child { color: var(--ok); }
 .grundlage { font-size: 12px; color: var(--warn); font-weight: 400; }
+.anpassungen { margin: 0 0 10px; padding-left: 18px; font-size: 13px; color: var(--grau); }
+.anpassungen li.nein { color: var(--warn); font-weight: 600; }
 tr.nein td { color: var(--kraft); font-weight: 600; }
 .d-pruef ul, .d-text ul { margin: 0; padding-left: 18px; font-size: 14px; }
 .d-pruef li + li, .d-text li + li { margin-top: 3px; }
@@ -251,9 +253,9 @@ tr.nein td { color: var(--kraft); font-weight: 600; }
 
 <noscript><p style="padding:16px">Der Detailkatalog braucht JavaScript.</p></noscript>
 <!-- VERSIONEN: von werkzeug/pruefe.mjs erzeugt (Inhalts-Hash je Modul, damit der Browser nach einem Update keine alten Dateien mischt) -->
-<script type="importmap">{"imports":{"./js/app.js":"./js/app.js?v=fad19355","./js/dk.js":"./js/dk.js?v=21e1be5b","./js/hersteller.js":"./js/hersteller.js?v=f31c1b72","./js/holzbau.js":"./js/holzbau.js?v=e1027bdd","./js/parameter.js":"./js/parameter.js?v=cea8c3c9","./js/profile.js":"./js/profile.js?v=a2530641","./js/schraffur.js":"./js/schraffur.js?v=a64988f0","./js/stahlbau.js":"./js/stahlbau.js?v=c6eb043e","./js/werkstoffe.js":"./js/werkstoffe.js?v=d924d066","./details/dk-ho-02.js":"./details/dk-ho-02.js?v=1713182e","./details/dk-ho-03.js":"./details/dk-ho-03.js?v=eadccd0e","./details/dk-ho-04.js":"./details/dk-ho-04.js?v=66b6b298","./details/dk-ho-05.js":"./details/dk-ho-05.js?v=cba73da9","./details/dk-st-01.js":"./details/dk-st-01.js?v=5a403fd3","./details/dk-st-02.js":"./details/dk-st-02.js?v=7cafaa6c","./details/dk-st-03.js":"./details/dk-st-03.js?v=9d691706","./details/dk-st-04.js":"./details/dk-st-04.js?v=ebacc4c1","./details/dk-st-05.js":"./details/dk-st-05.js?v=e8c8dedb","./details/index.js":"./details/index.js?v=dce8b5e5"}}</script>
+<script type="importmap">{"imports":{"./js/app.js":"./js/app.js?v=af912664","./js/dk.js":"./js/dk.js?v=a4632919","./js/hersteller.js":"./js/hersteller.js?v=f31c1b72","./js/holzbau.js":"./js/holzbau.js?v=e1027bdd","./js/parameter.js":"./js/parameter.js?v=254cb1af","./js/profile.js":"./js/profile.js?v=a2530641","./js/schraffur.js":"./js/schraffur.js?v=a64988f0","./js/stahlbau.js":"./js/stahlbau.js?v=d03c1643","./js/werkstoffe.js":"./js/werkstoffe.js?v=d924d066","./details/dk-ho-02.js":"./details/dk-ho-02.js?v=1713182e","./details/dk-ho-03.js":"./details/dk-ho-03.js?v=eadccd0e","./details/dk-ho-04.js":"./details/dk-ho-04.js?v=66b6b298","./details/dk-ho-05.js":"./details/dk-ho-05.js?v=cba73da9","./details/dk-st-01.js":"./details/dk-st-01.js?v=a1bed471","./details/dk-st-02.js":"./details/dk-st-02.js?v=8b6ee8c4","./details/dk-st-03.js":"./details/dk-st-03.js?v=a0bc72ee","./details/dk-st-04.js":"./details/dk-st-04.js?v=ebacc4c1","./details/dk-st-05.js":"./details/dk-st-05.js?v=d159d47d","./details/index.js":"./details/index.js?v=dce8b5e5"}}</script>
 <!-- /VERSIONEN -->
-<script type="module" src="./js/app.js?v=fad19355"></script>
+<script type="module" src="./js/app.js?v=af912664"></script>
 <script>
   // Nach einem Update kann der Browser alte und neue Skriptdateien mischen; dann startet die Seite nicht.
   window.addEventListener("load", () => setTimeout(() => {

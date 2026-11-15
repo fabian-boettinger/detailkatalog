@@ -120,7 +120,7 @@ function baueFormular() {
         let feld;
         if (d.typ === "profil") feld = `<select id="${id}" data-key="${esc(d.key)}">${profilOptionen(d, p[d.key])}</select>`;
         else if (d.typ === "auswahl") feld = `<select id="${id}" data-key="${esc(d.key)}">${d.optionen.map((o) => `<option value="${esc(o.wert)}"${String(o.wert) === String(p[d.key]) ? " selected" : ""}>${esc(o.text)}</option>`).join("")}</select>`;
-        else feld = `<input id="${id}" data-key="${esc(d.key)}" type="text" inputmode="${d.typ === "zahl" ? "decimal" : "text"}" value="${esc(alsText(d, p[d.key]))}" autocomplete="off" spellcheck="false">`;
+        else feld = `<input id="${id}" data-key="${esc(d.key)}" type="text" inputmode="${d.typ === "zahl" ? "decimal" : "text"}" value="${esc(istAuto(d, p) ? "" : alsText(d, p[d.key]))}" autocomplete="off" spellcheck="false">`;
         const grenzen = d.typ === "zahl" && d.min !== undefined ? ` <span class="grenzen">${d.min}–${d.max}</span>` : "";
         return `<div class="eingabe" data-feld="${esc(d.key)}">
           <label for="${id}">${index(d.label)}${grenzen}</label>
@@ -137,13 +137,17 @@ function baueFormular() {
   $("#eingaben").innerHTML = haupt + (weitere ? `<details class="weitere"${offen ? " open" : ""}><summary>Weitere Eingaben</summary>${weitere}</details>` : "");
 }
 
+// Parameter mit auto: true und Wert 0: das Detail ermittelt den Wert (z.auto), das Feld bleibt leer
+const istAuto = (d, p) => !!d.auto && Number(p[d.key]) === 0;
+
 // Formularwerte nach einer Profilwahl aktualisieren, ohne den Fokus zu verlieren
-function aktualisiereFormular(p, info) {
+function aktualisiereFormular(p, info, auto = {}) {
   for (const d of aktiv.det.parameter) {
     const el = $(`[data-key="${CSS.escape(d.key)}"]`, $("#eingaben"));
+    if (el && d.auto) el.placeholder = auto[d.key] !== undefined ? `${fmtZ(auto[d.key])} (automatisch)` : "";
     if (el && document.activeElement !== el) {
       if (d.typ === "profil" || d.typ === "auswahl") el.value = String(p[d.key] ?? "");
-      else el.value = alsText(d, p[d.key]);
+      else el.value = istAuto(d, p) ? "" : alsText(d, p[d.key]);
     }
     const h = $(`[data-hinweis="${CSS.escape(d.key)}"]`);
     if (!h) continue; // verborgene Parameter
@@ -172,14 +176,16 @@ function renderDetail() {
   const img = $("#d-bild");
   img.src = svgUrl(r[modus]);
   img.width = r.z.b; img.height = Math.ceil(r.z.h);
-  aktualisiereFormular(r.p, r.info);
+  aktualisiereFormular(r.p, r.info, r.z.auto);
 
   const pr = r.z.pruefungen;
   const nein = pr.filter((x) => !x.ok).length;
-  $("#d-pruefung").innerHTML = pr.length ? `
+  // Automatik: was an die Profile angepasst wurde bzw. was sich nicht lösen lässt
+  const anp = r.z.anpassungen || [];
+  $("#d-pruefung").innerHTML = (anp.length ? `<ul class="anpassungen">${anp.map((t) => `<li${t.startsWith("Nicht lösbar") ? ' class="nein"' : ""}>${index(t)}</li>`).join("")}</ul>` : "") + (pr.length ? `
     <table><thead><tr><th>Abstand</th><th class="z">ist</th><th class="z">soll</th><th></th></tr></thead><tbody>
     ${pr.map((x) => `<tr class="${x.ok ? "ok" : "nein"}"><td>${index(x.bez)}${x.grundlage ? `<br><span class="grundlage">${index(x.grundlage)}</span>` : ""}</td><td class="z">${fmtZ(x.ist)}</td><td class="z">≥ ${fmtZ(x.soll)}</td><td>${x.ok ? "ok" : "nicht eingehalten"}</td></tr>`).join("")}
-    </tbody></table>` : `<p class="leise">Keine Abstandsprüfung (schematisches Detail).</p>`;
+    </tbody></table>` : `<p class="leise">Keine Abstandsprüfung (schematisches Detail).</p>`);
   $("#d-pruefung-kopf").textContent = pr.length ? (nein ? `Abstände: ${nein} von ${pr.length} nicht eingehalten` : `Abstände: alle ${pr.length} eingehalten`) : "Abstände";
   $("#d-pruefung-kopf").dataset.status = nein ? "nein" : "ok";
 

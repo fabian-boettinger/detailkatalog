@@ -11,10 +11,11 @@ export const STAHL = {
 };
 export const STAHL_OPTIONEN = [{ wert: "S235", text: "S235" }, { wert: "S355", text: "S355" }];
 
-// Schrauben: Nenndurchmesser, Lochdurchmesser (normales Lochspiel), Spannungsquerschnitt
+// Schrauben: Nenndurchmesser, Lochdurchmesser (normales Lochspiel), Spannungsquerschnitt,
+// dU = Außendurchmesser der Scheibe (DIN EN ISO 7089) für die Kollisionsprüfung mit Ausrundung und Naht
 export const SCHRAUBEN = {
-  M12: { d: 12, d0: 13, As: 84.3 }, M16: { d: 16, d0: 18, As: 157 }, M20: { d: 20, d0: 22, As: 245 },
-  M24: { d: 24, d0: 26, As: 353 }, M27: { d: 27, d0: 30, As: 459 }, M30: { d: 30, d0: 33, As: 561 },
+  M12: { d: 12, d0: 13, As: 84.3, dU: 24 }, M16: { d: 16, d0: 18, As: 157, dU: 30 }, M20: { d: 20, d0: 22, As: 245, dU: 37 },
+  M24: { d: 24, d0: 26, As: 353, dU: 44 }, M27: { d: 27, d0: 30, As: 459, dU: 50 }, M30: { d: 30, d0: 33, As: 561, dU: 56 },
 };
 export const schraubenOptionen = (liste) => liste.map((m) => ({ wert: m, text: `${m} (Loch ${SCHRAUBEN[m].d0} mm)` }));
 export const FESTIGKEIT = { "8.8": { fub: 800, alphaV: 0.6 }, "10.9": { fub: 1000, alphaV: 0.5 } };
@@ -55,6 +56,95 @@ export function vplRd(A, stahl) {
 
 // Runden auf 5 mm (für abgeleitete Maße)
 export const auf5 = (v) => Math.ceil(v / 5 - 1e-9) * 5;
+
+// ---------------------------------------------------------------------------------------------
+// Automatische Anpassung der Anschlussgeometrie an die gewählten Profile.
+// Vorgaben mit Wert 0 gelten als „automatisch“; eingegebene Werte bleiben unverändert und werden nur geprüft.
+
+// Schraubenreihe in Kraftrichtung (n Schrauben, Abstand p1, Rand e1) in die Höhe platz einpassen.
+// ziel: angestrebte Mindesthöhe des Blechs (z. B. 0,6 h für die Verdrehhalterung des Trägers).
+// Reihenfolge: n aus ziel, dann p1 von 3 d0 bis 2,2 d0 verkleinern, dann e1 von 1,8 d0 bis 1,2 d0,
+// zuletzt n verringern. passt = false: auch mit den Mindestabständen nach Tab. 3.3 kein Platz.
+export function reiheEinpassen({ m, platz, ziel = 0, n = 0, p1 = 0, nMin = 2, nMax = 8 }) {
+  const { d0 } = SCHRAUBEN[m];
+  const p1Std = auf5(3 * d0), p1Min = auf5(2.2 * d0), e1Std = auf5(1.8 * d0), e1Min = auf5(1.2 * d0);
+  const hoehe = (k, p, e) => (k - 1) * p + 2 * e;
+  const nAuto = !(n > 0), pAuto = !(p1 > 0);
+  let k = nAuto ? nMin : Math.round(n);
+  if (nAuto) while (k < nMax && hoehe(k, pAuto ? p1Std : p1, e1Std) < ziel - 1e-9) k++;
+  const versuch = (k) => {
+    const ps = [];
+    if (pAuto) for (let p = p1Std; p >= p1Min; p -= 5) ps.push(p); else ps.push(p1);
+    for (const p of ps) if (hoehe(k, p, e1Std) <= platz + 1e-9) return { p1: p, e1: e1Std };
+    const pk = ps[ps.length - 1];
+    for (let e = e1Std - 5; e >= e1Min; e -= 5) if (hoehe(k, pk, e) <= platz + 1e-9) return { p1: pk, e1: e };
+    return null;
+  };
+  let r = versuch(k);
+  while (!r && nAuto && k > nMin) r = versuch(--k);
+  const passt = !!r;
+  if (!r) r = { p1: pAuto ? p1Min : p1, e1: e1Min };
+  return { n: k, p1: r.p1, e1: r.e1, h: hoehe(k, r.p1, r.e1), passt, nAuto, pAuto, p1Std, e1Std };
+}
+
+// Meldungen zu reiheEinpassen() für z.anpassungen. blech mit Artikel: z. B. "das Fahnenblech", platz wie oben
+export function reiheMeldungen(R, platz, blech) {
+  const t = [], z = (v) => String(Math.round(v * 10) / 10).replace(".", ",");
+  if (!R.passt) {
+    t.push(`Nicht lösbar: ${blech.replace(/^\S+\s/, "")} mit ${R.n} Schrauben braucht mindestens ${z(R.h)} mm, der gerade Stegteil hat ${z(platz)} mm. ` +
+      (R.nAuto && R.pAuto ? "Kleinere Schraube oder höheren Träger wählen." : "Anzahl und Lochabstand auf „automatisch“ stellen (Feld leeren) oder kleinere Schraube wählen."));
+    return t;
+  }
+  if (R.pAuto && R.p1 < R.p1Std) t.push(`Lochabstand p_{1} von ${z(R.p1Std)} auf ${z(R.p1)} mm verkleinert, damit ${blech} in den geraden Stegteil (${z(platz)} mm) passt.`);
+  if (R.e1 < R.e1Std) t.push(`Randabstand e_{1} von ${z(R.e1Std)} auf ${z(R.e1)} mm verkleinert (Mindestwert 1,2 d_{0} eingehalten).`);
+  return t;
+}
+
+// Wurzelmaß w zweier Schraubenreihen beidseits eines Stegs. Untere Grenzen: Scheibe frei neben
+// Steg + Kehlnaht des angeschweißten Trägers (wT) und frei neben Steg + Ausrundung der Stütze (wS),
+// p2 ≥ 2,4 d0. Obere Grenze: Randabstand 1,2 d0 im Flansch der Breite bMax.
+// w > 0: Vorgabe, wird nur geprüft. Rückgabe {w, wMinT, wMinS, wMax, passt, auto}.
+export function wurzelmass({ m, w = 0, twT = 0, nahtT = 0, S = null, bMax = Infinity }) {
+  const { d, d0, dU } = SCHRAUBEN[m];
+  const wMinT = twT + 2 * nahtT * Math.SQRT2 + 2 * d; // wie Prüfung „Schraube neben der Naht“
+  const wMinS = S ? S.tw + 2 * S.r + dU : 0;
+  const wMin = Math.max(wMinT, wMinS, 2.4 * d0);
+  const wMax = bMax - 2 * 1.2 * d0;
+  const auto = !(w > 0);
+  if (!auto) return { w, wMinT, wMinS, wMax, passt: w >= wMin - 0.05 && w <= wMax + 0.05, auto };
+  // bevorzugt mit 10 mm Luft je Seite neben der Naht, auf 5 mm gerundet; sonst das Mindestmaß
+  const kandidaten = [auf5(Math.max(wMinT + 20, wMinS, 2.4 * d0)), auf5(wMin), Math.ceil(wMin - 1e-9), Math.ceil(wMin * 10 - 1e-9) / 10];
+  const wahl = kandidaten.find((x) => x <= wMax + 0.05);
+  return { w: wahl ?? kandidaten[2], wMinT, wMinS, wMax, passt: wahl !== undefined, auto };
+}
+
+// Meldungen zu wurzelmass() für z.anpassungen
+export function wurzelMeldungen(W, m) {
+  const z = (v) => String(Math.round(v * 10) / 10).replace(".", ","), { d0 } = SCHRAUBEN[m];
+  const wMin = Math.max(W.wMinT, W.wMinS, 2.4 * d0);
+  if (!W.passt) {
+    const unten = `mindestens ${z(wMin)} mm (${W.wMinS >= W.wMinT ? "Scheibe frei neben Steg und Ausrundung der Stütze" : "Schraube frei neben Steg und Naht des Trägers"})`;
+    if (wMin > W.wMax + 0.05) return [`Nicht lösbar: Wurzelmaß w braucht ${unten}, der Stützenflansch lässt mit dem Randabstand 1,2 d_{0} ` +
+      `${W.wMax > 0 ? `höchstens ${z(W.wMax)} mm` : "keine zwei Schraubenreihen"} zu. Kleinere Schraube oder breitere Stütze wählen.`];
+    return [`Nicht lösbar: Wurzelmaß w = ${z(W.w)} mm muss ${unten} und höchstens ${z(W.wMax)} mm (Randabstand 1,2 d_{0} im Stützenflansch) betragen. ` +
+      "Wurzelmaß auf „automatisch“ stellen (Feld leeren)."];
+  }
+  if (W.auto && W.wMinS > W.wMinT + 20) return [`Wurzelmaß w = ${z(W.w)} mm aus der Stütze bestimmt: Scheibe frei neben Steg und Ausrundung (t_{w} + 2 r + d_{U} = ${z(W.wMinS)} mm).`];
+  if (W.auto && W.w < auf5(Math.max(W.wMinT + 20, 2.4 * d0))) return [`Wurzelmaß w auf ${z(W.w)} mm verkleinert, damit der Randabstand im Stützenflansch eingehalten ist.`];
+  return [];
+}
+
+// Randabstand e2 einer Stirnplatte mit Wurzelmaß w: 1,5 d0, bei schmalem Stützenflansch (Breite bS)
+// bis 1,2 d0 verkleinert, damit die Platte nicht übersteht
+export function plattenRand(m, w, bS) {
+  const { d0 } = SCHRAUBEN[m], std = auf5(1.5 * d0), frei = (bS - w) / 2;
+  if (frei >= std) return std;
+  return frei >= 1.2 * d0 - 0.05 ? frei : Math.ceil(1.2 * d0 - 1e-9); // bündig mit dem Flansch, sonst Mindestmaß (Platte steht über)
+}
+
+// Gezeigte Breite einer Stütze in der Ansicht (mm ab Außenfläche des Anschlussflanschs): ganz, solange
+// sie neben dem Träger nicht dominiert, sonst nur der Anschlussbereich (damit der Maßstab lesbar bleibt)
+export const stuetzeSichtbar = (S, T) => (S.h <= Math.max(200, 0.9 * T.h) ? S.h : Math.max(160, 0.4 * T.h));
 
 // Profilparameter (verborgen, aus der Profilwahl gefüllt) und Lesen der Werte
 export const PROFIL_I = ["IPE", "HEA", "HEB", "HEM"];

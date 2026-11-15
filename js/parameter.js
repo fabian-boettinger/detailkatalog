@@ -4,6 +4,8 @@
 //   {key, label, typ: "zahl" | "profil" | "auswahl" | "lagen", einheit, standard, min, max,
 //    reihe (bei profil), fuellt (bei profil: {Profilfeld: key} oder {Profilfeld: [key, umrechnung, vergleichen]}),
 //    optionen (bei auswahl: [{wert, text}]),
+//    auto (bei zahl, standard 0: leer oder 0 = automatisch; das Detail ermittelt den Wert und meldet
+//          ihn über z.auto[key], Formular und Protokoll zeigen ihn an),
 //    gruppe (Überschrift im Formular), hilfe}
 // typ "lagen": Lagenfolge in mm als Text, z. B. "40-40-80-40-40" (BSP-Aufbau).
 //
@@ -97,7 +99,8 @@ export function loese(parameter, roh = {}, profile = null) {
     if (d.typ === "zahl") {
       let v = zahl(t);
       if (Number.isNaN(v)) { info[d.key] = { status: "fehler", meldung: "keine Zahl, Standardwert verwendet" }; continue; }
-      if (d.min !== undefined && v < d.min) { info[d.key] = { status: "grenze", meldung: `min. ${d.min}` }; v = d.min; }
+      if (d.auto && v === 0) info[d.key] = { status: "ok" }; // 0 = automatisch, auch unterhalb von min
+      else if (d.min !== undefined && v < d.min) { info[d.key] = { status: "grenze", meldung: `min. ${d.min}` }; v = d.min; }
       else if (d.max !== undefined && v > d.max) { info[d.key] = { status: "grenze", meldung: `max. ${d.max}` }; v = d.max; }
       else info[d.key] = { status: "ok" };
       p[d.key] = v;
