@@ -1,0 +1,389 @@
+{
+ "titel": "Stahl, Hohlprofile (Auswahl gängiger Abmessungen)",
+ "quelle": "Abmessungen nach DIN EN 10210-2 (warm) bzw. DIN EN 10219-2 (kalt); Auswahl, Lieferbarkeit beim Hersteller prüfen",
+ "reihen": {
+  "RHS": {
+   "felder": {
+    "h": "Höhe h",
+    "b": "Breite b",
+    "t": "Wanddicke t"
+   },
+   "profile": [
+    {
+     "name": "RHS 40×20×2",
+     "gruppe": "rechteckig",
+     "h": 40,
+     "b": 20,
+     "t": 2
+    },
+    {
+     "name": "RHS 50×30×3",
+     "gruppe": "rechteckig",
+     "h": 50,
+     "b": 30,
+     "t": 3
+    },
+    {
+     "name": "RHS 60×40×3",
+     "gruppe": "rechteckig",
+     "h": 60,
+     "b": 40,
+     "t": 3
+    },
+    {
+     "name": "RHS 60×40×4",
+     "gruppe": "rechteckig",
+     "h": 60,
+     "b": 40,
+     "t": 4
+    },
+    {
+     "name": "RHS 80×40×4",
+     "gruppe": "rechteckig",
+     "h": 80,
+     "b": 40,
+     "t": 4
+    },
+    {
+     "name": "RHS 80×60×4",
+     "gruppe": "rechteckig",
+     "h": 80,
+     "b": 60,
+     "t": 4
+    },
+    {
+     "name": "RHS 100×50×4",
+     "gruppe": "rechteckig",
+     "h": 100,
+     "b": 50,
+     "t": 4
+    },
+    {
+     "name": "RHS 100×50×5",
+     "gruppe": "rechteckig",
+     "h": 100,
+     "b": 50,
+     "t": 5
+    },
+    {
+     "name": "RHS 100×60×4",
+     "gruppe": "rechteckig",
+     "h": 100,
+     "b": 60,
+     "t": 4
+    },
+    {
+     "name": "RHS 100×60×5",
+     "gruppe": "rechteckig",
+     "h": 100,
+     "b": 60,
+     "t": 5
+    },
+    {
+     "name": "RHS 120×60×5",
+     "gruppe": "rechteckig",
+     "h": 120,
+     "b": 60,
+     "t": 5
+    },
+    {
+     "name": "RHS 120×80×5",
+     "gruppe": "rechteckig",
+     "h": 120,
+     "b": 80,
+     "t": 5
+    },
+    {
+     "name": "RHS 140×80×5",
+     "gruppe": "rechteckig",
+     "h": 140,
+     "b": 80,
+     "t": 5
+    },
+    {
+     "name": "RHS 150×100×5",
+     "gruppe": "rechteckig",
+     "h": 150,
+     "b": 100,
+     "t": 5
+    },
+    {
+     "name": "RHS 150×100×6",
+     "gruppe": "rechteckig",
+     "h": 150,
+     "b": 100,
+     "t": 6
+    },
+    {
+     "name": "RHS 160×80×6",
+     "gruppe": "rechteckig",
+     "h": 160,
+     "b": 80,
+     "t": 6
+    },
+    {
+     "name": "RHS 180×100×6",
+     "gruppe": "rechteckig",
+     "h": 180,
+     "b": 100,
+     "t": 6
+    },
+    {
+     "name": "RHS 200×100×6",
+     "gruppe": "rechteckig",
+     "h": 200,
+     "b": 100,
+     "t": 6
+    },
+    {
+     "name": "RHS 200×100×8",
+     "gruppe": "rechteckig",
+     "h": 200,
+     "b": 100,
+     "t": 8
+    },
+    {
+     "name": "RHS 200×120×8",
+     "gruppe": "rechteckig",
+     "h": 200,
+     "b": 120,
+     "t": 8
+    },
+    {
+     "name": "RHS 250×150×8",
+     "gruppe": "rechteckig",
+     "h": 250,
+     "b": 150,
+     "t": 8
+    },
+    {
+     "name": "RHS 300×200×10",
+     "gruppe": "rechteckig",
+     "h": 300,
+     "b": 200,
+     "t": 10
+    },
+    {
+     "name": "SHS 40×40×3",
+     "gruppe": "quadratisch",
+     "h": 40,
+     "b": 40,
+     "t": 3
+    },
+    {
+     "name": "SHS 50×50×4",
+     "gruppe": "quadratisch",
+     "h": 50,
+     "b": 50,
+     "t": 4
+    },
+    {
+     "name": "SHS 60×60×4",
+     "gruppe": "quadratisch",
+     "h": 60,
+     "b": 60,
+     "t": 4
+    },
+    {
+     "name": "SHS 70×70×5",
+     "gruppe": "quadratisch",
+     "h": 70,
+     "b": 70,
+     "t": 5
+    },
+    {
+     "name": "SHS 80×80×5",
+     "gruppe": "quadratisch",
+     "h": 80,
+     "b": 80,
+     "t": 5
+    },
+    {
+     "name": "SHS 90×90×5",
+     "gruppe": "quadratisch",
+     "h": 90,
+     "b": 90,
+     "t": 5
+    },
+    {
+     "name": "SHS 100×100×5",
+     "gruppe": "quadratisch",
+     "h": 100,
+     "b": 100,
+     "t": 5
+    },
+    {
+     "name": "SHS 100×100×6",
+     "gruppe": "quadratisch",
+     "h": 100,
+     "b": 100,
+     "t": 6
+    },
+    {
+     "name": "SHS 120×120×6",
+     "gruppe": "quadratisch",
+     "h": 120,
+     "b": 120,
+     "t": 6
+    },
+    {
+     "name": "SHS 140×140×8",
+     "gruppe": "quadratisch",
+     "h": 140,
+     "b": 140,
+     "t": 8
+    },
+    {
+     "name": "SHS 150×150×8",
+     "gruppe": "quadratisch",
+     "h": 150,
+     "b": 150,
+     "t": 8
+    },
+    {
+     "name": "SHS 160×160×8",
+     "gruppe": "quadratisch",
+     "h": 160,
+     "b": 160,
+     "t": 8
+    },
+    {
+     "name": "SHS 180×180×10",
+     "gruppe": "quadratisch",
+     "h": 180,
+     "b": 180,
+     "t": 10
+    },
+    {
+     "name": "SHS 200×200×10",
+     "gruppe": "quadratisch",
+     "h": 200,
+     "b": 200,
+     "t": 10
+    },
+    {
+     "name": "SHS 250×250×10",
+     "gruppe": "quadratisch",
+     "h": 250,
+     "b": 250,
+     "t": 10
+    },
+    {
+     "name": "SHS 300×300×12",
+     "gruppe": "quadratisch",
+     "h": 300,
+     "b": 300,
+     "t": 12
+    }
+   ]
+  },
+  "CHS": {
+   "felder": {
+    "d": "Außendurchmesser d",
+    "t": "Wanddicke t"
+   },
+   "profile": [
+    {
+     "name": "CHS 33,7×3,2",
+     "d": 33.7,
+     "t": 3.2
+    },
+    {
+     "name": "CHS 42,4×3,2",
+     "d": 42.4,
+     "t": 3.2
+    },
+    {
+     "name": "CHS 48,3×3,2",
+     "d": 48.3,
+     "t": 3.2
+    },
+    {
+     "name": "CHS 48,3×4",
+     "d": 48.3,
+     "t": 4
+    },
+    {
+     "name": "CHS 60,3×4",
+     "d": 60.3,
+     "t": 4
+    },
+    {
+     "name": "CHS 76,1×4",
+     "d": 76.1,
+     "t": 4
+    },
+    {
+     "name": "CHS 88,9×4",
+     "d": 88.9,
+     "t": 4
+    },
+    {
+     "name": "CHS 88,9×5",
+     "d": 88.9,
+     "t": 5
+    },
+    {
+     "name": "CHS 101,6×5",
+     "d": 101.6,
+     "t": 5
+    },
+    {
+     "name": "CHS 114,3×5",
+     "d": 114.3,
+     "t": 5
+    },
+    {
+     "name": "CHS 114,3×6,3",
+     "d": 114.3,
+     "t": 6.3
+    },
+    {
+     "name": "CHS 139,7×6,3",
+     "d": 139.7,
+     "t": 6.3
+    },
+    {
+     "name": "CHS 168,3×6,3",
+     "d": 168.3,
+     "t": 6.3
+    },
+    {
+     "name": "CHS 168,3×8",
+     "d": 168.3,
+     "t": 8
+    },
+    {
+     "name": "CHS 193,7×8",
+     "d": 193.7,
+     "t": 8
+    },
+    {
+     "name": "CHS 219,1×8",
+     "d": 219.1,
+     "t": 8
+    },
+    {
+     "name": "CHS 219,1×10",
+     "d": 219.1,
+     "t": 10
+    },
+    {
+     "name": "CHS 244,5×10",
+     "d": 244.5,
+     "t": 10
+    },
+    {
+     "name": "CHS 273×10",
+     "d": 273,
+     "t": 10
+    },
+    {
+     "name": "CHS 323,9×10",
+     "d": 323.9,
+     "t": 10
+    }
+   ]
+  }
+ }
+}

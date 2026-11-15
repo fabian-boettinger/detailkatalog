@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Detailkatalog Tragwerksplanung</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: eine Spalte Zeichnungsblätter, jedes mit Schriftfeld wie auf einer Werkplanung; Werkzeugleiste oben fest */
+:root {
+  --papier: #f3f5f7;      /* Seitengrund, leicht stahlblau */
+  --blatt: #ffffff;       /* Zeichenfläche bleibt in beiden Themes weiß */
+  --flaeche: #ffffff;     /* Karten, Felder */
+  --tinte: #18212b;       /* Text */
+  --grau: #5b6875;        /* Nebentext, Linien in Zeichnungen */
+  --linie: #d3dae2;       /* Rahmen, Schriftfeldlinien */
+  --akzent: #1f4e79;      /* Stahlblau aus den Skizzen */
+  --akzent-text: #ffffff;
+  --kraft: #c0392b;
+  --ok: #1d6b3a;
+  --warn: #b26a00;
+  --font-titel: "IBM Plex Sans Condensed", "Arial Narrow", Arial, sans-serif;
+  --font-text: "IBM Plex Sans", Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", Consolas, "Courier New", monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --papier: #12171d; --flaeche: #1a2129; --tinte: #e4e9ee; --grau: #9aa7b4;
+    --linie: #2c3640; --akzent: #7fb0dc; --akzent-text: #0e1620; --kraft: #e06a5c; --ok: #6cc28a; --warn: #e3a54a; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --papier: #12171d; --flaeche: #1a2129; --tinte: #e4e9ee; --grau: #9aa7b4;
+  --linie: #2c3640; --akzent: #7fb0dc; --akzent-text: #0e1620; --kraft: #e06a5c; --ok: #6cc28a; --warn: #e3a54a; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--papier); color: var(--tinte); font-family: var(--font-text); font-size: 15px; line-height: 1.5;
+  padding-inline: 16px;
+}
+[hidden] { display: none !important; }
+.wrap { max-width: 1240px; margin: 0 auto; padding-block: 28px 64px; display: grid; gap: 22px; }
+header { display: grid; gap: 4px; }
+.eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--grau); }
+h1 { font-family: var(--font-titel); font-weight: 600; font-size: clamp(28px, 4vw, 38px); line-height: 1.1; margin: 0; text-wrap: balance; }
+.lead { margin: 0; color: var(--grau); max-width: 75ch; }
+.haftung { margin: 0; font-size: 13px; color: var(--kraft); font-weight: 500; }
+
+.leiste {
+  position: sticky; top: 0; z-index: 5; background: var(--papier);
+  padding-block: 10px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; border-bottom: 1px solid var(--linie);
+}
+.suche { flex: 1 1 260px; min-width: 0; }
+.suche input, .eingabe input, .eingabe select {
+  width: 100%; font: inherit; color: var(--tinte); background: var(--flaeche); border: 1px solid var(--linie);
+  border-radius: 4px; padding: 8px 12px;
+}
+.chips, .umschalter { display: flex; gap: 6px; flex-wrap: wrap; }
+.chip, .umschalter button {
+  font: 500 13px var(--font-text); color: var(--tinte); background: var(--flaeche); border: 1px solid var(--linie);
+  border-radius: 4px; padding: 6px 10px; cursor: pointer;
+}
+.chip[aria-pressed="true"], .umschalter button[aria-pressed="true"] { background: var(--akzent); color: var(--akzent-text); border-color: var(--akzent); }
+.umschalter { border-left: 1px solid var(--linie); padding-left: 10px; }
+:focus-visible { outline: 2px solid var(--akzent); outline-offset: 2px; }
+
+/* Übersicht als Kacheln */
+.liste { display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); }
+.kachel { display: grid; grid-template-rows: auto 1fr; background: var(--flaeche); border: 1px solid var(--linie); border-radius: 4px;
+  overflow: hidden; color: inherit; text-decoration: none; transition: border-color .15s, box-shadow .15s; }
+.kachel:hover { border-color: var(--akzent); box-shadow: 0 2px 10px rgba(31, 78, 121, .12); }
+.kachel .vorschau { display: block; background: var(--blatt); aspect-ratio: 16 / 10; border-bottom: 1px solid var(--linie); padding: 6px; }
+.kachel .vorschau img { width: 100%; height: 100%; object-fit: contain; object-position: center; display: block; }
+.kachel-text { display: grid; gap: 2px; padding: 8px 10px 10px; }
+.kachel .nr { font-size: 13px; }
+.kachel-titel { font-family: var(--font-titel); font-weight: 600; font-size: 15px; line-height: 1.25; }
+.liste .leer { grid-column: 1 / -1; }
+details.weitere { border-top: 1px solid var(--linie); margin-top: 10px; padding-top: 6px; }
+details.weitere summary { cursor: pointer; font-size: 13px; color: var(--akzent); font-weight: 500; padding: 4px 0; }
+details.weitere fieldset:first-of-type { border-top: 0; margin-top: 4px; }
+.trag-ergebnis { display: flex; flex-wrap: wrap; gap: 6px 22px; margin: 0 0 8px; font-size: 15px; }
+.trag-ergebnis strong { font-family: var(--font-mono); }
+tr.massgebend td { font-weight: 600; }
+.trag-hinweise { margin: 8px 0 0; padding-left: 18px; font-size: 13px; color: var(--grau); }
+.blatt { background: var(--flaeche); border: 1px solid var(--linie); border-radius: 4px; overflow: hidden; }
+.zeichnung { display: block; background: var(--blatt); padding: 14px; border-bottom: 1px solid var(--linie); overflow-x: auto; }
+.zeichnung img { display: block; width: 100%; min-width: 560px; height: auto; }
+
+/* Schriftfeld nach Art einer Zeichnung: Felder mit kleiner Überschrift */
+.schriftfeld { display: grid; grid-template-columns: 130px 1fr auto; }
+.feld { padding: 10px 14px; border-right: 1px solid var(--linie); min-width: 0; }
+.feld:last-child { border-right: 0; }
+.k { font-family: var(--font-mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--grau); }
+.nr { font-family: var(--font-mono); font-weight: 500; font-size: 16px; color: var(--akzent); }
+.feld h2 { font-family: var(--font-titel); font-weight: 600; font-size: 19px; line-height: 1.25; margin: 0; text-wrap: balance; }
+.feld p { margin: 2px 0 0; color: var(--grau); font-size: 14px; }
+.aktionen { display: flex; flex-direction: column; gap: 6px; justify-content: center; }
+.btn {
+  font: 600 13px var(--font-text); border-radius: 4px; padding: 7px 12px; cursor: pointer; white-space: nowrap;
+  border: 1px solid var(--akzent); background: var(--akzent); color: var(--akzent-text); text-decoration: none; text-align: center;
+}
+.btn.leise { background: transparent; color: var(--akzent); }
+.status { font-size: 13px; color: var(--grau); min-height: 1.2em; }
+.warnung { font-size: 13px; color: var(--warn); }
+.leer { padding: 40px; text-align: center; color: var(--grau); border: 1px dashed var(--linie); border-radius: 4px; }
+.fuss { color: var(--grau); font-size: 13px; display: grid; gap: 4px; }
+.fuss p { margin: 0; }
+
+/* Detailansicht: Eingaben links, Zeichnung rechts */
+.d-kopf { display: grid; grid-template-columns: auto 1fr; gap: 4px 16px; align-items: baseline; }
+.d-kopf h2 { font-family: var(--font-titel); font-weight: 600; font-size: clamp(22px, 3vw, 28px); line-height: 1.15; margin: 0; grid-column: 1 / -1; text-wrap: balance; }
+.d-kopf p { grid-column: 1 / -1; margin: 0; color: var(--grau); max-width: 90ch; }
+.zurueck { font-size: 14px; color: var(--akzent); }
+.d-raster { display: grid; grid-template-columns: 290px minmax(0, 1fr); gap: 18px; align-items: start; }
+.d-raster.ohne-eingaben { grid-template-columns: minmax(0, 1fr); }
+.karte { background: var(--flaeche); border: 1px solid var(--linie); border-radius: 4px; }
+#d-eingaben-wrap { padding: 4px 14px 14px; position: sticky; top: 70px; max-height: calc(100vh - 84px); overflow: auto; }
+fieldset { border: 0; border-top: 1px solid var(--linie); margin: 10px 0 0; padding: 8px 0 0; display: grid; gap: 8px; }
+fieldset:first-child { border-top: 0; margin-top: 0; }
+legend { font-family: var(--font-mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--grau); padding: 0; }
+.eingabe { display: grid; gap: 2px; }
+.eingabe label { font-size: 14px; font-weight: 500; }
+.eingabe .grenzen { font-weight: 400; color: var(--grau); font-size: 12px; font-family: var(--font-mono); }
+.eingabe .wert { display: flex; align-items: center; gap: 6px; }
+.eingabe input, .eingabe select { padding: 6px 8px; font-family: var(--font-mono); font-size: 14px; }
+.eingabe .einheit { font-family: var(--font-mono); font-size: 13px; color: var(--grau); min-width: 2.2em; }
+.eingabe .hinweis { font-size: 12px; color: var(--grau); min-height: 0; }
+.eingabe .hinweis:empty { display: none; }
+.eingabe[data-status="grenze"] input, .eingabe[data-status="fehler"] input, .eingabe[data-status="fehler"] select { border-color: var(--kraft); }
+.eingabe[data-status="grenze"] .hinweis, .eingabe[data-status="fehler"] .hinweis { color: var(--kraft); }
+.eingabe[data-status="eigen"] .hinweis { color: var(--grau); }
+.d-rechts { display: grid; gap: 14px; min-width: 0; }
+.d-bild { background: var(--blatt); padding: 14px; overflow-x: auto; border-bottom: 1px solid var(--linie); }
+.d-bild img { display: block; width: 100%; min-width: 560px; height: auto; }
+.d-aktionen { display: flex; flex-wrap: wrap; gap: 8px; padding: 10px 14px; }
+.d-pruef { display: grid; grid-template-columns: 3fr 2fr; gap: 14px; }
+.d-pruef .karte { padding: 10px 14px; }
+.d-pruef h3, .d-text h3, #d-trag-wrap h3 { font-family: var(--font-mono); font-weight: 500; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; margin: 0 0 6px; color: var(--grau); }
+h3[data-status="ok"] { color: var(--ok); }
+h3[data-status="nein"] { color: var(--kraft); }
+h3[data-status="warnung"] { color: var(--warn); }
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+th { text-align: left; font-weight: 500; color: var(--grau); font-size: 12px; border-bottom: 1px solid var(--linie); padding: 2px 6px 4px 0; }
+td { padding: 3px 6px 3px 0; border-bottom: 1px solid var(--linie); vertical-align: top; }
+.z { text-align: right; font-family: var(--font-mono); font-size: 13px; white-space: nowrap; }
+tr.ok td:last-child { color: var(--ok); }
+.grundlage { font-size: 12px; color: var(--warn); font-weight: 400; }
+tr.nein td { color: var(--kraft); font-weight: 600; }
+.d-pruef ul, .d-text ul { margin: 0; padding-left: 18px; font-size: 14px; }
+.d-pruef li + li, .d-text li + li { margin-top: 3px; }
+.leise { color: var(--grau); margin: 0; font-size: 14px; }
+.d-text { display: grid; grid-template-columns: 2fr 1fr; gap: 18px; padding: 12px 14px; }
+
+/* Ersatz, wenn die Zwischenablage kein Bild annimmt */
+.overlay { position: fixed; inset: 0; z-index: 20; background: rgba(10, 14, 18, .72); display: grid; place-items: center; padding: 16px; }
+.overlay .karte { padding: 16px; max-width: 980px; width: 100%; display: grid; gap: 10px; max-height: 100%; overflow: auto; }
+.overlay img { width: 100%; height: auto; background: #fff; border: 1px solid var(--linie); }
+
+@media (max-width: 900px) {
+  .d-raster { grid-template-columns: 1fr; }
+  #d-eingaben-wrap { position: static; max-height: none; }
+  .d-pruef, .d-text { grid-template-columns: 1fr; }
+}
+@media (max-width: 720px) {
+  .schriftfeld { grid-template-columns: 1fr; }
+  .feld { border-right: 0; border-bottom: 1px solid var(--linie); }
+  .aktionen { flex-direction: row; flex-wrap: wrap; }
+  .umschalter { border-left: 0; padding-left: 0; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Tragwerksplanung · Standarddetails</div>
+    <h1>Detailkatalog</h1>
+    <p class="lead">Anschlussdetails maßstäblich, mit Kräften als Symbol. Maße eingeben oder Profile wählen: Zeichnung, Beschriftung und Prüfliste der Mindestabstände passen sich an. „Bild kopieren“ legt die Zeichnung in hoher Auflösung in die Zwischenablage, zum Einfügen in VCmaster mit Strg+V.</p>
+    <p class="haftung">Ungeprüft, keine Gewähr. Verbindungsmittel nach ETA.</p>
+  </header>
+
+  <div class="leiste">
+    <div class="suche" role="search"><input id="suche" type="search" placeholder="Suchen: Fahnenblech, BSP, Vollgewindeschraube, M_Ed …" aria-label="Details durchsuchen"></div>
+    <div class="chips" id="chips" aria-label="Kategorie"></div>
+    <div class="umschalter" aria-label="Darstellung">
+      <button id="modus-farbe" type="button" aria-pressed="true">Farbe</button>
+      <button id="modus-sw" type="button" aria-pressed="false">Schwarz-weiß</button>
+    </div>
+  </div>
+
+  <div class="status" id="status" aria-live="polite"></div>
+  <div class="warnung" id="warnung" hidden></div>
+
+  <main id="ansicht-liste" class="liste-wrap">
+    <div class="liste" id="liste"></div>
+  </main>
+
+  <main id="ansicht-detail" hidden>
+    <div class="d-kopf">
+      <a href="./" class="zurueck" id="d-zurueck">← Katalog</a>
+      <span><span class="nr" id="d-nr"></span> <span class="k" id="d-kat"></span></span>
+      <h2 id="d-titel"></h2>
+      <p id="d-beschreibung"></p>
+    </div>
+    <div class="d-raster" style="margin-top:14px">
+      <aside class="karte" id="d-eingaben-wrap" aria-label="Eingaben">
+        <form id="eingaben" onsubmit="return false"></form>
+      </aside>
+      <div class="d-rechts">
+        <div class="karte">
+          <div class="d-bild"><img id="d-bild" alt="Zeichnung"></div>
+          <div class="d-aktionen">
+            <button class="btn" type="button" id="d-kopie">Bild kopieren</button>
+            <button class="btn leise" type="button" id="d-svg">SVG-Code kopieren</button>
+            <button class="btn leise" type="button" id="d-link">Link kopieren</button>
+            <button class="btn leise" type="button" id="d-standard">Standardwerte</button>
+          </div>
+        </div>
+        <section class="karte" id="d-trag-wrap" style="padding:10px 14px" hidden>
+          <h3>Tragfähigkeit, überschlägig (Bemessungswerte)</h3>
+          <div id="d-trag"></div>
+          <p class="leise" style="margin:6px 0 0"><a id="d-nachweis" href="https://fabian-boettinger.github.io/bemessungstool/detailkatalog/index.html" target="_blank" rel="noopener">Nachweis mit Einwirkungen im Bemessungstool</a></p>
+        </section>
+        <div class="d-pruef">
+          <section class="karte"><h3 id="d-pruefung-kopf">Abstände</h3><div id="d-pruefung"></div></section>
+          <section class="karte"><h3 id="d-layout-kopf">Layout</h3><div id="d-layout"></div></section>
+        </div>
+        <div class="karte d-text">
+          <div><h3>Erforderliche Nachweise</h3><ul id="d-nachweise"></ul></div>
+          <div><h3>Faustwerte im Vault</h3><ul id="d-faustwerte"></ul></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="fuss">
+    <p><strong>Ungeprüft, keine Gewähr. Verbindungsmittel nach ETA.</strong> Die Details sind Ausführungsvorschläge; Nachweise, Mindestabstände und Einschraubtiefen im Projekt nach Norm und ETA führen.</p>
+    <p>Kräfte sind Symbole ohne Projektwerte. Profilwerte nach den im Profilkatalog genannten Quellen; Lieferbarkeit beim Hersteller prüfen.</p>
+  </footer>
+</div>
+
+<div class="overlay" id="overlay" hidden>
+  <div class="karte" role="dialog" aria-modal="true" aria-labelledby="ov-titel">
+    <strong id="ov-titel">Bild zum Kopieren</strong>
+    <span class="status">Die Zwischenablage hat das Bild nicht angenommen. Rechtsklick auf das Bild, dann „Bild kopieren“ oder „Bild speichern unter“.</span>
+    <img id="ov-bild" alt="">
+    <button class="btn" id="ov-zu" type="button">Schließen</button>
+  </div>
+</div>
+
+<noscript><p style="padding:16px">Der Detailkatalog braucht JavaScript.</p></noscript>
+<!-- VERSIONEN: von werkzeug/pruefe.mjs erzeugt (Inhalts-Hash je Modul, damit der Browser nach einem Update keine alten Dateien mischt) -->
+<script type="importmap">{"imports":{"./js/app.js":"./js/app.js?v=fad19355","./js/dk.js":"./js/dk.js?v=21e1be5b","./js/hersteller.js":"./js/hersteller.js?v=f31c1b72","./js/holzbau.js":"./js/holzbau.js?v=e1027bdd","./js/parameter.js":"./js/parameter.js?v=cea8c3c9","./js/profile.js":"./js/profile.js?v=a2530641","./js/schraffur.js":"./js/schraffur.js?v=a64988f0","./js/stahlbau.js":"./js/stahlbau.js?v=c6eb043e","./js/werkstoffe.js":"./js/werkstoffe.js?v=d924d066","./details/dk-ho-02.js":"./details/dk-ho-02.js?v=1713182e","./details/dk-ho-03.js":"./details/dk-ho-03.js?v=eadccd0e","./details/dk-ho-04.js":"./details/dk-ho-04.js?v=66b6b298","./details/dk-ho-05.js":"./details/dk-ho-05.js?v=cba73da9","./details/dk-st-01.js":"./details/dk-st-01.js?v=5a403fd3","./details/dk-st-02.js":"./details/dk-st-02.js?v=7cafaa6c","./details/dk-st-03.js":"./details/dk-st-03.js?v=9d691706","./details/dk-st-04.js":"./details/dk-st-04.js?v=ebacc4c1","./details/dk-st-05.js":"./details/dk-st-05.js?v=e8c8dedb","./details/index.js":"./details/index.js?v=dce8b5e5"}}</script>
+<!-- /VERSIONEN -->
+<script type="module" src="./js/app.js?v=fad19355"></script>
+<script>
+  // Nach einem Update kann der Browser alte und neue Skriptdateien mischen; dann startet die Seite nicht.
+  window.addEventListener("load", () => setTimeout(() => {
+    if (window.DK_GELADEN) return;
+    const h = document.createElement("p");
+    h.style.cssText = "margin:24px auto;max-width:1240px;padding:12px 16px;border:1px solid #c0392b;color:#c0392b;font:15px sans-serif";
+    h.textContent = "Die Seite konnte nicht vollständig geladen werden (meist veraltete Dateien im Browser-Cache). Bitte mit Strg + F5 neu laden.";
+    document.body.prepend(h);
+  }, 1500));
+</script>
+</body>
+</html>

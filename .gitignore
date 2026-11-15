@@ -1,0 +1,6 @@
+/ausgabe/
+node_modules/
+__pycache__/
+
+# Herstellerunterlagen (ETA-PDFs) nur lokal, nicht ins Repo
+quellen/

@@ -1,0 +1,9 @@
+{
+ "dateien": [
+  "stahl_walzprofile.json",
+  "stahl_hohlprofile.json",
+  "holz_querschnitte.json",
+  "bsp_aufbauten.json",
+  "vollgewindeschrauben.json"
+ ]
+}

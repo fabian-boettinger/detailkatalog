@@ -1,0 +1,842 @@
+{
+ "titel": "Vollgewindeschrauben (allgemein)",
+ "quelle": "Allgemeine Werte, Längenreihen beispielhaft; Abmessungen, Einschraubtiefen und Abstände nach ETA des Herstellers",
+ "reihen": {
+  "VG": {
+   "felder": {
+    "d": "Nenndurchmesser d",
+    "L": "Länge L"
+   },
+   "profile": [
+    {
+     "name": "VG Ø6 × 60",
+     "gruppe": "d = 6 mm",
+     "d": 6,
+     "L": 60
+    },
+    {
+     "name": "VG Ø6 × 80",
+     "gruppe": "d = 6 mm",
+     "d": 6,
+     "L": 80
+    },
+    {
+     "name": "VG Ø6 × 100",
+     "gruppe": "d = 6 mm",
+     "d": 6,
+     "L": 100
+    },
+    {
+     "name": "VG Ø6 × 120",
+     "gruppe": "d = 6 mm",
+     "d": 6,
+     "L": 120
+    },
+    {
+     "name": "VG Ø6 × 140",
+     "gruppe": "d = 6 mm",
+     "d": 6,
+     "L": 140
+    },
+    {
+     "name": "VG Ø6 × 160",
+     "gruppe": "d = 6 mm",
+     "d": 6,
+     "L": 160
+    },
+    {
+     "name": "VG Ø6 × 180",
+     "gruppe": "d = 6 mm",
+     "d": 6,
+     "L": 180
+    },
+    {
+     "name": "VG Ø6 × 200",
+     "gruppe": "d = 6 mm",
+     "d": 6,
+     "L": 200
+    },
+    {
+     "name": "VG Ø6 × 220",
+     "gruppe": "d = 6 mm",
+     "d": 6,
+     "L": 220
+    },
+    {
+     "name": "VG Ø6 × 240",
+     "gruppe": "d = 6 mm",
+     "d": 6,
+     "L": 240
+    },
+    {
+     "name": "VG Ø6 × 260",
+     "gruppe": "d = 6 mm",
+     "d": 6,
+     "L": 260
+    },
+    {
+     "name": "VG Ø6 × 280",
+     "gruppe": "d = 6 mm",
+     "d": 6,
+     "L": 280
+    },
+    {
+     "name": "VG Ø6 × 300",
+     "gruppe": "d = 6 mm",
+     "d": 6,
+     "L": 300
+    },
+    {
+     "name": "VG Ø7 × 80",
+     "gruppe": "d = 7 mm",
+     "d": 7,
+     "L": 80
+    },
+    {
+     "name": "VG Ø7 × 100",
+     "gruppe": "d = 7 mm",
+     "d": 7,
+     "L": 100
+    },
+    {
+     "name": "VG Ø7 × 120",
+     "gruppe": "d = 7 mm",
+     "d": 7,
+     "L": 120
+    },
+    {
+     "name": "VG Ø7 × 140",
+     "gruppe": "d = 7 mm",
+     "d": 7,
+     "L": 140
+    },
+    {
+     "name": "VG Ø7 × 160",
+     "gruppe": "d = 7 mm",
+     "d": 7,
+     "L": 160
+    },
+    {
+     "name": "VG Ø7 × 180",
+     "gruppe": "d = 7 mm",
+     "d": 7,
+     "L": 180
+    },
+    {
+     "name": "VG Ø7 × 200",
+     "gruppe": "d = 7 mm",
+     "d": 7,
+     "L": 200
+    },
+    {
+     "name": "VG Ø7 × 220",
+     "gruppe": "d = 7 mm",
+     "d": 7,
+     "L": 220
+    },
+    {
+     "name": "VG Ø7 × 240",
+     "gruppe": "d = 7 mm",
+     "d": 7,
+     "L": 240
+    },
+    {
+     "name": "VG Ø7 × 260",
+     "gruppe": "d = 7 mm",
+     "d": 7,
+     "L": 260
+    },
+    {
+     "name": "VG Ø7 × 280",
+     "gruppe": "d = 7 mm",
+     "d": 7,
+     "L": 280
+    },
+    {
+     "name": "VG Ø7 × 300",
+     "gruppe": "d = 7 mm",
+     "d": 7,
+     "L": 300
+    },
+    {
+     "name": "VG Ø7 × 340",
+     "gruppe": "d = 7 mm",
+     "d": 7,
+     "L": 340
+    },
+    {
+     "name": "VG Ø7 × 380",
+     "gruppe": "d = 7 mm",
+     "d": 7,
+     "L": 380
+    },
+    {
+     "name": "VG Ø7 × 400",
+     "gruppe": "d = 7 mm",
+     "d": 7,
+     "L": 400
+    },
+    {
+     "name": "VG Ø8 × 80",
+     "gruppe": "d = 8 mm",
+     "d": 8,
+     "L": 80
+    },
+    {
+     "name": "VG Ø8 × 100",
+     "gruppe": "d = 8 mm",
+     "d": 8,
+     "L": 100
+    },
+    {
+     "name": "VG Ø8 × 120",
+     "gruppe": "d = 8 mm",
+     "d": 8,
+     "L": 120
+    },
+    {
+     "name": "VG Ø8 × 140",
+     "gruppe": "d = 8 mm",
+     "d": 8,
+     "L": 140
+    },
+    {
+     "name": "VG Ø8 × 160",
+     "gruppe": "d = 8 mm",
+     "d": 8,
+     "L": 160
+    },
+    {
+     "name": "VG Ø8 × 180",
+     "gruppe": "d = 8 mm",
+     "d": 8,
+     "L": 180
+    },
+    {
+     "name": "VG Ø8 × 200",
+     "gruppe": "d = 8 mm",
+     "d": 8,
+     "L": 200
+    },
+    {
+     "name": "VG Ø8 × 220",
+     "gruppe": "d = 8 mm",
+     "d": 8,
+     "L": 220
+    },
+    {
+     "name": "VG Ø8 × 240",
+     "gruppe": "d = 8 mm",
+     "d": 8,
+     "L": 240
+    },
+    {
+     "name": "VG Ø8 × 260",
+     "gruppe": "d = 8 mm",
+     "d": 8,
+     "L": 260
+    },
+    {
+     "name": "VG Ø8 × 280",
+     "gruppe": "d = 8 mm",
+     "d": 8,
+     "L": 280
+    },
+    {
+     "name": "VG Ø8 × 300",
+     "gruppe": "d = 8 mm",
+     "d": 8,
+     "L": 300
+    },
+    {
+     "name": "VG Ø8 × 330",
+     "gruppe": "d = 8 mm",
+     "d": 8,
+     "L": 330
+    },
+    {
+     "name": "VG Ø8 × 380",
+     "gruppe": "d = 8 mm",
+     "d": 8,
+     "L": 380
+    },
+    {
+     "name": "VG Ø8 × 430",
+     "gruppe": "d = 8 mm",
+     "d": 8,
+     "L": 430
+    },
+    {
+     "name": "VG Ø8 × 480",
+     "gruppe": "d = 8 mm",
+     "d": 8,
+     "L": 480
+    },
+    {
+     "name": "VG Ø8 × 530",
+     "gruppe": "d = 8 mm",
+     "d": 8,
+     "L": 530
+    },
+    {
+     "name": "VG Ø8 × 580",
+     "gruppe": "d = 8 mm",
+     "d": 8,
+     "L": 580
+    },
+    {
+     "name": "VG Ø9 × 160",
+     "gruppe": "d = 9 mm",
+     "d": 9,
+     "L": 160
+    },
+    {
+     "name": "VG Ø9 × 180",
+     "gruppe": "d = 9 mm",
+     "d": 9,
+     "L": 180
+    },
+    {
+     "name": "VG Ø9 × 200",
+     "gruppe": "d = 9 mm",
+     "d": 9,
+     "L": 200
+    },
+    {
+     "name": "VG Ø9 × 220",
+     "gruppe": "d = 9 mm",
+     "d": 9,
+     "L": 220
+    },
+    {
+     "name": "VG Ø9 × 240",
+     "gruppe": "d = 9 mm",
+     "d": 9,
+     "L": 240
+    },
+    {
+     "name": "VG Ø9 × 260",
+     "gruppe": "d = 9 mm",
+     "d": 9,
+     "L": 260
+    },
+    {
+     "name": "VG Ø9 × 280",
+     "gruppe": "d = 9 mm",
+     "d": 9,
+     "L": 280
+    },
+    {
+     "name": "VG Ø9 × 300",
+     "gruppe": "d = 9 mm",
+     "d": 9,
+     "L": 300
+    },
+    {
+     "name": "VG Ø9 × 320",
+     "gruppe": "d = 9 mm",
+     "d": 9,
+     "L": 320
+    },
+    {
+     "name": "VG Ø9 × 340",
+     "gruppe": "d = 9 mm",
+     "d": 9,
+     "L": 340
+    },
+    {
+     "name": "VG Ø9 × 360",
+     "gruppe": "d = 9 mm",
+     "d": 9,
+     "L": 360
+    },
+    {
+     "name": "VG Ø9 × 380",
+     "gruppe": "d = 9 mm",
+     "d": 9,
+     "L": 380
+    },
+    {
+     "name": "VG Ø9 × 400",
+     "gruppe": "d = 9 mm",
+     "d": 9,
+     "L": 400
+    },
+    {
+     "name": "VG Ø9 × 440",
+     "gruppe": "d = 9 mm",
+     "d": 9,
+     "L": 440
+    },
+    {
+     "name": "VG Ø9 × 480",
+     "gruppe": "d = 9 mm",
+     "d": 9,
+     "L": 480
+    },
+    {
+     "name": "VG Ø9 × 520",
+     "gruppe": "d = 9 mm",
+     "d": 9,
+     "L": 520
+    },
+    {
+     "name": "VG Ø9 × 560",
+     "gruppe": "d = 9 mm",
+     "d": 9,
+     "L": 560
+    },
+    {
+     "name": "VG Ø9 × 600",
+     "gruppe": "d = 9 mm",
+     "d": 9,
+     "L": 600
+    },
+    {
+     "name": "VG Ø10 × 100",
+     "gruppe": "d = 10 mm",
+     "d": 10,
+     "L": 100
+    },
+    {
+     "name": "VG Ø10 × 120",
+     "gruppe": "d = 10 mm",
+     "d": 10,
+     "L": 120
+    },
+    {
+     "name": "VG Ø10 × 140",
+     "gruppe": "d = 10 mm",
+     "d": 10,
+     "L": 140
+    },
+    {
+     "name": "VG Ø10 × 160",
+     "gruppe": "d = 10 mm",
+     "d": 10,
+     "L": 160
+    },
+    {
+     "name": "VG Ø10 × 180",
+     "gruppe": "d = 10 mm",
+     "d": 10,
+     "L": 180
+    },
+    {
+     "name": "VG Ø10 × 200",
+     "gruppe": "d = 10 mm",
+     "d": 10,
+     "L": 200
+    },
+    {
+     "name": "VG Ø10 × 220",
+     "gruppe": "d = 10 mm",
+     "d": 10,
+     "L": 220
+    },
+    {
+     "name": "VG Ø10 × 240",
+     "gruppe": "d = 10 mm",
+     "d": 10,
+     "L": 240
+    },
+    {
+     "name": "VG Ø10 × 260",
+     "gruppe": "d = 10 mm",
+     "d": 10,
+     "L": 260
+    },
+    {
+     "name": "VG Ø10 × 280",
+     "gruppe": "d = 10 mm",
+     "d": 10,
+     "L": 280
+    },
+    {
+     "name": "VG Ø10 × 300",
+     "gruppe": "d = 10 mm",
+     "d": 10,
+     "L": 300
+    },
+    {
+     "name": "VG Ø10 × 330",
+     "gruppe": "d = 10 mm",
+     "d": 10,
+     "L": 330
+    },
+    {
+     "name": "VG Ø10 × 360",
+     "gruppe": "d = 10 mm",
+     "d": 10,
+     "L": 360
+    },
+    {
+     "name": "VG Ø10 × 400",
+     "gruppe": "d = 10 mm",
+     "d": 10,
+     "L": 400
+    },
+    {
+     "name": "VG Ø10 × 450",
+     "gruppe": "d = 10 mm",
+     "d": 10,
+     "L": 450
+    },
+    {
+     "name": "VG Ø10 × 500",
+     "gruppe": "d = 10 mm",
+     "d": 10,
+     "L": 500
+    },
+    {
+     "name": "VG Ø10 × 550",
+     "gruppe": "d = 10 mm",
+     "d": 10,
+     "L": 550
+    },
+    {
+     "name": "VG Ø10 × 600",
+     "gruppe": "d = 10 mm",
+     "d": 10,
+     "L": 600
+    },
+    {
+     "name": "VG Ø10 × 700",
+     "gruppe": "d = 10 mm",
+     "d": 10,
+     "L": 700
+    },
+    {
+     "name": "VG Ø10 × 800",
+     "gruppe": "d = 10 mm",
+     "d": 10,
+     "L": 800
+    },
+    {
+     "name": "VG Ø11 × 150",
+     "gruppe": "d = 11 mm",
+     "d": 11,
+     "L": 150
+    },
+    {
+     "name": "VG Ø11 × 200",
+     "gruppe": "d = 11 mm",
+     "d": 11,
+     "L": 200
+    },
+    {
+     "name": "VG Ø11 × 250",
+     "gruppe": "d = 11 mm",
+     "d": 11,
+     "L": 250
+    },
+    {
+     "name": "VG Ø11 × 275",
+     "gruppe": "d = 11 mm",
+     "d": 11,
+     "L": 275
+    },
+    {
+     "name": "VG Ø11 × 300",
+     "gruppe": "d = 11 mm",
+     "d": 11,
+     "L": 300
+    },
+    {
+     "name": "VG Ø11 × 325",
+     "gruppe": "d = 11 mm",
+     "d": 11,
+     "L": 325
+    },
+    {
+     "name": "VG Ø11 × 350",
+     "gruppe": "d = 11 mm",
+     "d": 11,
+     "L": 350
+    },
+    {
+     "name": "VG Ø11 × 375",
+     "gruppe": "d = 11 mm",
+     "d": 11,
+     "L": 375
+    },
+    {
+     "name": "VG Ø11 × 400",
+     "gruppe": "d = 11 mm",
+     "d": 11,
+     "L": 400
+    },
+    {
+     "name": "VG Ø11 × 450",
+     "gruppe": "d = 11 mm",
+     "d": 11,
+     "L": 450
+    },
+    {
+     "name": "VG Ø11 × 500",
+     "gruppe": "d = 11 mm",
+     "d": 11,
+     "L": 500
+    },
+    {
+     "name": "VG Ø11 × 550",
+     "gruppe": "d = 11 mm",
+     "d": 11,
+     "L": 550
+    },
+    {
+     "name": "VG Ø11 × 600",
+     "gruppe": "d = 11 mm",
+     "d": 11,
+     "L": 600
+    },
+    {
+     "name": "VG Ø11 × 800",
+     "gruppe": "d = 11 mm",
+     "d": 11,
+     "L": 800
+    },
+    {
+     "name": "VG Ø11 × 1000",
+     "gruppe": "d = 11 mm",
+     "d": 11,
+     "L": 1000
+    },
+    {
+     "name": "VG Ø12 × 120",
+     "gruppe": "d = 12 mm",
+     "d": 12,
+     "L": 120
+    },
+    {
+     "name": "VG Ø12 × 140",
+     "gruppe": "d = 12 mm",
+     "d": 12,
+     "L": 140
+    },
+    {
+     "name": "VG Ø12 × 160",
+     "gruppe": "d = 12 mm",
+     "d": 12,
+     "L": 160
+    },
+    {
+     "name": "VG Ø12 × 180",
+     "gruppe": "d = 12 mm",
+     "d": 12,
+     "L": 180
+    },
+    {
+     "name": "VG Ø12 × 200",
+     "gruppe": "d = 12 mm",
+     "d": 12,
+     "L": 200
+    },
+    {
+     "name": "VG Ø12 × 220",
+     "gruppe": "d = 12 mm",
+     "d": 12,
+     "L": 220
+    },
+    {
+     "name": "VG Ø12 × 240",
+     "gruppe": "d = 12 mm",
+     "d": 12,
+     "L": 240
+    },
+    {
+     "name": "VG Ø12 × 260",
+     "gruppe": "d = 12 mm",
+     "d": 12,
+     "L": 260
+    },
+    {
+     "name": "VG Ø12 × 280",
+     "gruppe": "d = 12 mm",
+     "d": 12,
+     "L": 280
+    },
+    {
+     "name": "VG Ø12 × 300",
+     "gruppe": "d = 12 mm",
+     "d": 12,
+     "L": 300
+    },
+    {
+     "name": "VG Ø12 × 340",
+     "gruppe": "d = 12 mm",
+     "d": 12,
+     "L": 340
+    },
+    {
+     "name": "VG Ø12 × 380",
+     "gruppe": "d = 12 mm",
+     "d": 12,
+     "L": 380
+    },
+    {
+     "name": "VG Ø12 × 420",
+     "gruppe": "d = 12 mm",
+     "d": 12,
+     "L": 420
+    },
+    {
+     "name": "VG Ø12 × 480",
+     "gruppe": "d = 12 mm",
+     "d": 12,
+     "L": 480
+    },
+    {
+     "name": "VG Ø12 × 540",
+     "gruppe": "d = 12 mm",
+     "d": 12,
+     "L": 540
+    },
+    {
+     "name": "VG Ø12 × 600",
+     "gruppe": "d = 12 mm",
+     "d": 12,
+     "L": 600
+    },
+    {
+     "name": "VG Ø12 × 700",
+     "gruppe": "d = 12 mm",
+     "d": 12,
+     "L": 700
+    },
+    {
+     "name": "VG Ø12 × 800",
+     "gruppe": "d = 12 mm",
+     "d": 12,
+     "L": 800
+    },
+    {
+     "name": "VG Ø12 × 900",
+     "gruppe": "d = 12 mm",
+     "d": 12,
+     "L": 900
+    },
+    {
+     "name": "VG Ø12 × 1000",
+     "gruppe": "d = 12 mm",
+     "d": 12,
+     "L": 1000
+    },
+    {
+     "name": "VG Ø13 × 200",
+     "gruppe": "d = 13 mm",
+     "d": 13,
+     "L": 200
+    },
+    {
+     "name": "VG Ø13 × 300",
+     "gruppe": "d = 13 mm",
+     "d": 13,
+     "L": 300
+    },
+    {
+     "name": "VG Ø13 × 400",
+     "gruppe": "d = 13 mm",
+     "d": 13,
+     "L": 400
+    },
+    {
+     "name": "VG Ø13 × 500",
+     "gruppe": "d = 13 mm",
+     "d": 13,
+     "L": 500
+    },
+    {
+     "name": "VG Ø13 × 600",
+     "gruppe": "d = 13 mm",
+     "d": 13,
+     "L": 600
+    },
+    {
+     "name": "VG Ø13 × 700",
+     "gruppe": "d = 13 mm",
+     "d": 13,
+     "L": 700
+    },
+    {
+     "name": "VG Ø13 × 800",
+     "gruppe": "d = 13 mm",
+     "d": 13,
+     "L": 800
+    },
+    {
+     "name": "VG Ø13 × 1000",
+     "gruppe": "d = 13 mm",
+     "d": 13,
+     "L": 1000
+    },
+    {
+     "name": "VG Ø13 × 1200",
+     "gruppe": "d = 13 mm",
+     "d": 13,
+     "L": 1200
+    },
+    {
+     "name": "VG Ø13 × 1500",
+     "gruppe": "d = 13 mm",
+     "d": 13,
+     "L": 1500
+    },
+    {
+     "name": "VG Ø14 × 200",
+     "gruppe": "d = 14 mm",
+     "d": 14,
+     "L": 200
+    },
+    {
+     "name": "VG Ø14 × 300",
+     "gruppe": "d = 14 mm",
+     "d": 14,
+     "L": 300
+    },
+    {
+     "name": "VG Ø14 × 400",
+     "gruppe": "d = 14 mm",
+     "d": 14,
+     "L": 400
+    },
+    {
+     "name": "VG Ø14 × 500",
+     "gruppe": "d = 14 mm",
+     "d": 14,
+     "L": 500
+    },
+    {
+     "name": "VG Ø14 × 600",
+     "gruppe": "d = 14 mm",
+     "d": 14,
+     "L": 600
+    },
+    {
+     "name": "VG Ø14 × 800",
+     "gruppe": "d = 14 mm",
+     "d": 14,
+     "L": 800
+    },
+    {
+     "name": "VG Ø14 × 1000",
+     "gruppe": "d = 14 mm",
+     "d": 14,
+     "L": 1000
+    },
+    {
+     "name": "VG Ø14 × 1200",
+     "gruppe": "d = 14 mm",
+     "d": 14,
+     "L": 1200
+    },
+    {
+     "name": "VG Ø14 × 1500",
+     "gruppe": "d = 14 mm",
+     "d": 14,
+     "L": 1500
+    }
+   ]
+  }
+ }
+}

@@ -1,0 +1,284 @@
+{
+ "titel": "Brettsperrholz, generische Aufbauten",
+ "quelle": "Generische Aufbauten ohne Herstellerbezug (Lagendicken beispielhaft); Herstelleraufbauten nur einzeln mit Quelle ergänzen",
+ "reihen": {
+  "BSP": {
+   "felder": {
+    "d": "Dicke d",
+    "lagen": "Lagen von oben",
+    "decklage": "Decklagen zur Haupttragrichtung (laengs/quer)",
+    "aufbau": "Lagenfolge (abwechselnd / doppelt = Längslagen doppelt)"
+   },
+   "profile": [
+    {
+     "name": "BSP L3 60 (20-20-20)",
+     "gruppe": "L3",
+     "d": 60,
+     "lagen": [
+      20,
+      20,
+      20
+     ],
+     "decklage": "laengs",
+     "aufbau": "abwechselnd"
+    },
+    {
+     "name": "BSP L3 80 (20-40-20)",
+     "gruppe": "L3",
+     "d": 80,
+     "lagen": [
+      20,
+      40,
+      20
+     ],
+     "decklage": "laengs",
+     "aufbau": "abwechselnd"
+    },
+    {
+     "name": "BSP L3 90 (30-30-30)",
+     "gruppe": "L3",
+     "d": 90,
+     "lagen": [
+      30,
+      30,
+      30
+     ],
+     "decklage": "laengs",
+     "aufbau": "abwechselnd"
+    },
+    {
+     "name": "BSP L3 100 (30-40-30)",
+     "gruppe": "L3",
+     "d": 100,
+     "lagen": [
+      30,
+      40,
+      30
+     ],
+     "decklage": "laengs",
+     "aufbau": "abwechselnd"
+    },
+    {
+     "name": "BSP L3 120 (40-40-40)",
+     "gruppe": "L3",
+     "d": 120,
+     "lagen": [
+      40,
+      40,
+      40
+     ],
+     "decklage": "laengs",
+     "aufbau": "abwechselnd"
+    },
+    {
+     "name": "BSP L5 100 (20-20-20-20-20)",
+     "gruppe": "L5",
+     "d": 100,
+     "lagen": [
+      20,
+      20,
+      20,
+      20,
+      20
+     ],
+     "decklage": "laengs",
+     "aufbau": "abwechselnd"
+    },
+    {
+     "name": "BSP L5 120 (20-30-20-30-20)",
+     "gruppe": "L5",
+     "d": 120,
+     "lagen": [
+      20,
+      30,
+      20,
+      30,
+      20
+     ],
+     "decklage": "laengs",
+     "aufbau": "abwechselnd"
+    },
+    {
+     "name": "BSP L5 140 (40-20-20-20-40)",
+     "gruppe": "L5",
+     "d": 140,
+     "lagen": [
+      40,
+      20,
+      20,
+      20,
+      40
+     ],
+     "decklage": "laengs",
+     "aufbau": "abwechselnd"
+    },
+    {
+     "name": "BSP L5 160 (40-20-40-20-40)",
+     "gruppe": "L5",
+     "d": 160,
+     "lagen": [
+      40,
+      20,
+      40,
+      20,
+      40
+     ],
+     "decklage": "laengs",
+     "aufbau": "abwechselnd"
+    },
+    {
+     "name": "BSP L5 180 (40-30-40-30-40)",
+     "gruppe": "L5",
+     "d": 180,
+     "lagen": [
+      40,
+      30,
+      40,
+      30,
+      40
+     ],
+     "decklage": "laengs",
+     "aufbau": "abwechselnd"
+    },
+    {
+     "name": "BSP L5 200 (40-40-40-40-40)",
+     "gruppe": "L5",
+     "d": 200,
+     "lagen": [
+      40,
+      40,
+      40,
+      40,
+      40
+     ],
+     "decklage": "laengs",
+     "aufbau": "abwechselnd"
+    },
+    {
+     "name": "BSP L5 240 (40-40-80-40-40)",
+     "gruppe": "L5",
+     "d": 240,
+     "lagen": [
+      40,
+      40,
+      80,
+      40,
+      40
+     ],
+     "decklage": "laengs",
+     "aufbau": "abwechselnd"
+    },
+    {
+     "name": "BSP L7 220 (30-30-30-40-30-30-30)",
+     "gruppe": "L7",
+     "d": 220,
+     "lagen": [
+      30,
+      30,
+      30,
+      40,
+      30,
+      30,
+      30
+     ],
+     "decklage": "laengs",
+     "aufbau": "abwechselnd"
+    },
+    {
+     "name": "BSP L7 240 (30-40-30-40-30-40-30)",
+     "gruppe": "L7",
+     "d": 240,
+     "lagen": [
+      30,
+      40,
+      30,
+      40,
+      30,
+      40,
+      30
+     ],
+     "decklage": "laengs",
+     "aufbau": "abwechselnd"
+    },
+    {
+     "name": "BSP L7 280 (40-40-40-40-40-40-40)",
+     "gruppe": "L7",
+     "d": 280,
+     "lagen": [
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40
+     ],
+     "decklage": "laengs",
+     "aufbau": "abwechselnd"
+    },
+    {
+     "name": "BSP L5s 160 (30-30-40-30-30)",
+     "gruppe": "L5s",
+     "d": 160,
+     "lagen": [
+      30,
+      30,
+      40,
+      30,
+      30
+     ],
+     "decklage": "laengs",
+     "aufbau": "doppelt"
+    },
+    {
+     "name": "BSP L5s 200 (40-40-40-40-40)",
+     "gruppe": "L5s",
+     "d": 200,
+     "lagen": [
+      40,
+      40,
+      40,
+      40,
+      40
+     ],
+     "decklage": "laengs",
+     "aufbau": "doppelt"
+    },
+    {
+     "name": "BSP L8s 260 (30-30-40-30-30-40-30-30)",
+     "gruppe": "L8s",
+     "d": 260,
+     "lagen": [
+      30,
+      30,
+      40,
+      30,
+      30,
+      40,
+      30,
+      30
+     ],
+     "decklage": "laengs",
+     "aufbau": "doppelt"
+    },
+    {
+     "name": "BSP L8s 300 (40-40-30-40-40-30-40-40)",
+     "gruppe": "L8s",
+     "d": 300,
+     "lagen": [
+      40,
+      40,
+      30,
+      40,
+      40,
+      30,
+      40,
+      40
+     ],
+     "decklage": "laengs",
+     "aufbau": "doppelt"
+    }
+   ]
+  }
+ }
+}
